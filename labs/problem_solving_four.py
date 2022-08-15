@@ -37,6 +37,24 @@ target = 55
 result = find_target_indices(given_numbers, target)
 print(f'\nTask 1: Target indices for {target} is {result}')
 
+# Task 1 #2
+
+
+def find_indices_sum(numbers, target):
+    num_list = list(enumerate(numbers))
+
+    for index in range(len(num_list)):
+        for key, value in num_list:
+            if index != key and numbers[index] + value == target:
+                return [index, key]
+
+
+numbers_list = [5, 17, 77, 50]
+target_number = 67
+
+result = find_indices_sum(numbers_list, target_number)
+print(f'\nTask 1 #2: Target indices for {target_number} is {result}')
+
 # Task 2: Palindrome
 
 

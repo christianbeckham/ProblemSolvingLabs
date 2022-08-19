@@ -1,18 +1,30 @@
 # Task 1: Happy Numbers
-# NEED TO COMPLETE TASK
-happy_number = 19
+
+
+def sum_of_square_numbers(number):
+    sum = 0
+    for num in str(number):
+        sum += int(num) * int(num)
+    return sum
 
 
 def is_happy_number(number):
-    # separate input numbers
-    first_integer = number // 10
-    second_integer = number % 10
+    list_of_numbers_checked = [number]
 
-    print('First num: ', first_integer)
-    print('Second num: ', second_integer)
+    while number != 1:
+        number = sum_of_square_numbers(number)
+
+        if number in list_of_numbers_checked:
+            return False
+
+        list_of_numbers_checked.append(number)
+
+    return True
 
 
-is_happy_number(happy_number)
+happy_number = 19
+result = is_happy_number(happy_number)
+print(f'Task 1: Is {happy_number} a happy number... {result}')
 
 # Task 2: Prime Numbers
 
@@ -32,62 +44,42 @@ def check_is_prime(number):
 
 
 all_prime_numbers = []
-
 for num in range(1, 101):
     is_prime = check_is_prime(num)
 
     if is_prime:
         all_prime_numbers.append(num)
 
-print('\nPrime numbers from 1-100:')
-print(all_prime_numbers)
+print('\nTask 2:')
+print('Prime numbers from 1-100:', all_prime_numbers)
 
 # Task 3 Fibonacci
-fib_sequence = []
-fib_start = 1
-fib_sequence_limit = 10
 
 
-def fibonacci_sequence(start_number, limit):
-    if len(fib_sequence) == limit:
-        return
+def generate_fibonacci_sequence(start_number, range_limit):
+    fibonacci_list = [start_number]
 
-    if len(fib_sequence) <= 1:
-        fib_sequence.append(start_number + 0)
-    else:
-        next_number = fib_sequence[-1] + fib_sequence[-2]
-        fib_sequence.append(next_number)
-        start_number = next_number
+    for index in range(range_limit):
+        if index == 0:
+            fibonacci_list.append(fibonacci_list[index] + 0)
+        else:
+            fibonacci_list.append(
+                fibonacci_list[index] + fibonacci_list[index - 1])
 
-    fibonacci_sequence(start_number, limit)
+    return fibonacci_list
 
 
-print(f'\nFirst {fib_sequence_limit} fibonacci numbers')
-fibonacci_sequence(fib_start, fib_sequence_limit)
-print(fib_sequence)
+start_number = 1
+range_limit = 10
+result = generate_fibonacci_sequence(start_number, range_limit)
+print('\nTask 3: Fibonacci sequence starting at 1 -', result)
 
 
 # Task 4: Fibonacci - Harder version
 # write method that does the Fibonacci sequence starting from a user input
 
-start_input = int(input('\nEnter a number to start a Fibonacci sequence: '))
-user_fib_sequence = []
-
-
-def create_fib_sequence(number, stop=10):
-    array_length = len(user_fib_sequence)
-
-    if array_length == stop:
-        return
-
-    if array_length <= 1:
-        user_fib_sequence.append(number + 0)
-    else:
-        number = user_fib_sequence[-1] + user_fib_sequence[-2]
-        user_fib_sequence.append(number)
-
-    create_fib_sequence(number)
-
-
-create_fib_sequence(start_input)
-print(user_fib_sequence)
+start_number_input = int(
+    input('\nEnter a number to start a Fibonacci sequence: '))
+range_limit = 15
+result = generate_fibonacci_sequence(start_number_input, range_limit)
+print(f'\nTask 4: Fibonacci sequence starting at {start_number_input}', result)

@@ -136,7 +136,34 @@ print(result)
 # Task 6: Email validation
 
 
+def validate_email_address(email):
+    at_sign_index = 0
+    at_sign_count = 0
+
+    for key, value in enumerate(email):
+        if value == '@':
+            at_sign_index = key
+            at_sign_count += 1
+
+    if 0 < at_sign_count < 2:
+        username = email[0:at_sign_index]
+        email_domain = email[at_sign_index + 1::]
+        print('\nUsername:', username, '\nEmail domain:', email_domain)
+        return True
+    else:
+        return False
+
+
+email_address = 'christian@gmail.com'
+is_valid_email_address = validate_email_address(email_address)
+print(
+    f'Task 6: Is {email_address} a valid email address... {is_valid_email_address}')
+
 
 # Task 7
+# replace characters with position in alphabet
+
+
+
 # Task 8: Briefcase Lock
 # Task 9

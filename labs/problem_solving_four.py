@@ -163,6 +163,22 @@ print(
 # Task 7
 # replace characters with position in alphabet
 
+def find_character_index_in_alphabet(string):
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    new_string = ''
+
+    for char in string:
+        for key, value in enumerate(alphabet):
+            if char == value:
+                new_string += str(key + 1)
+                break
+
+    return new_string
+
+
+string_to_replace = 'coding is fun'
+result = find_character_index_in_alphabet(string_to_replace)
+print('\nTask 7:', result)
 
 
 # Task 8: Briefcase Lock

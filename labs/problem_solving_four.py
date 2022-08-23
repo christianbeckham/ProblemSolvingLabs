@@ -182,4 +182,50 @@ print('\nTask 7:', result)
 
 
 # Task 8: Briefcase Lock
+
+def calculate_shortest_rolls(number, target):
+    lock_numbers = [num for num in range(0, 10)]
+
+    if number == target:
+        print(f'No rolls needed from {number} to {target}')
+        return 0
+    elif number > target:
+        forward_rolling_list = lock_numbers[number + 1:] + lock_numbers[:target + 1]
+        backward_rolling_list = lock_numbers[target:number]
+    else:
+        forward_rolling_list = lock_numbers[number + 1:target + 1]
+        backward_rolling_list = lock_numbers[target:] + lock_numbers[:number]
+        
+    forward_rolls = len(forward_rolling_list)
+    backward_rolls = len(backward_rolling_list)
+
+    if forward_rolls < backward_rolls:
+        print(f'Fastest roll from {number} to {target} is {forward_rolls} forward: {forward_rolling_list}')
+        return forward_rolls
+    else:
+        print(f'Fastest roll from {number} to {target} is {backward_rolls} backwards: {backward_rolling_list}')
+        return backward_rolls
+
+    
+
+def smallest_number_of_turns(current_combination, target_combination):
+    current_combination_string = str(current_combination)
+    target_combination_string = str(target_combination)
+    sum_of_rolls = 0
+
+    for index in range(len(current_combination_string)):
+        current_number = int(current_combination_string[index])
+        target_number = int(target_combination_string[index])
+        
+        roll_count = calculate_shortest_rolls(current_number, target_number)
+        sum_of_rolls += roll_count
+
+    return sum_of_rolls
+
+
+current_lock_combination = 3893
+target_lock_combination = 5296
+result = smallest_number_of_turns(current_lock_combination, target_lock_combination)
+print('\nTask 8: Total number of briefcase turns:', result)
+
 # Task 9
